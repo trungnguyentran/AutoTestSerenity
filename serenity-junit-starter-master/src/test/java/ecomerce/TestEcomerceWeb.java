@@ -78,7 +78,7 @@ public class TestEcomerceWeb {
 		
 		objMainSteps.displayInforProduct(arrobjInforProduct);
 		
-		//objMainSteps.VerifyDisplayInforProduct(lstDisplayInforProduct);
+		objMainSteps.VerifyDisplayInforProduct(lstDisplayInforProduct);
 		
 	}
 	
