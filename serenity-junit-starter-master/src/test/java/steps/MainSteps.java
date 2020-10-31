@@ -65,10 +65,10 @@ public class MainSteps {
 				int sizelstEleNameProduct = lstEleNameProduct.size();
 				int sizelstElePriceProduct = lstElePriceProduct.size();
 				int sizelstEleLinkProduct = lstEleLinkProduct.size();
-				
-				if (sizelstEleNameProduct == sizelstElePriceProduct
-					&& sizelstElePriceProduct == sizelstEleLinkProduct
-					&& sizelstEleLinkProduct == sizelstEleNameProduct) {
+//				
+//				if (sizelstEleNameProduct == sizelstElePriceProduct
+//					&& sizelstElePriceProduct == sizelstEleLinkProduct
+//					&& sizelstEleLinkProduct == sizelstEleNameProduct) {
 					
 						int idx = 0;
 						
@@ -83,26 +83,35 @@ public class MainSteps {
 							lstDisplayInforProduct.add(eleLinkProduct.isDisplayed());
 							
 							String nameProduct = eleNameProduct.getText();
-							String priceProduct = elePriceProduct.getText().substring(0, 12);
+							String priceProduct;
+							
+							if (elePriceProduct.getText().contains("to")) {
+							
+								int idxTo = elePriceProduct.getText().indexOf("to");
+								priceProduct = elePriceProduct.getText().substring(0, idxTo).replace("VND", "");	
+								
+							} else {
+								
+								int idxVND = elePriceProduct.getText().indexOf("VND");
+								priceProduct = elePriceProduct.getText().substring(0, idxVND);
+								
+							}
+							
 							String linkProduct = eleLinkProduct.getAttribute("href");
 							String nameWebSite = "Ebay";
 							
-							if (priceProduct != "") {
-							
-								InforProduct objInforProduct = new InforProduct();
-								objInforProduct.setNameWebsite(nameWebSite);
-								objInforProduct.setNameProduct(nameProduct);
-								objInforProduct.setPriceProduct(priceProduct);
-								objInforProduct.setLinkProduct(linkProduct);
-								lstInforProduct.add(objInforProduct);
-								
-							}
+							InforProduct objInforProduct = new InforProduct();
+							objInforProduct.setNameWebsite(nameWebSite);
+							objInforProduct.setNameProduct(nameProduct);
+							objInforProduct.setPriceProduct(priceProduct);
+							objInforProduct.setLinkProduct(linkProduct);
+							lstInforProduct.add(objInforProduct);	
 							
 							idx++;
 							
 						}
 						
-				}
+				//}
 				
 				String displayTest = sizelstEleNameProduct + " --- " + sizelstElePriceProduct + " --- " + sizelstEleLinkProduct;
 				System.out.println(displayTest);
