@@ -88,12 +88,13 @@ public class MainSteps {
 							if (elePriceProduct.getText().contains("to")) {
 							
 								int idxTo = elePriceProduct.getText().indexOf("to");
-								priceProduct = elePriceProduct.getText().substring(0, idxTo).replace("VND", "");	
+								priceProduct = elePriceProduct.getText().substring(0, idxTo).replace("VND", "")
+										              .replace(".", "").replace(",", "").trim();	
 								
 							} else {
 								
 								int idxVND = elePriceProduct.getText().indexOf("VND");
-								priceProduct = elePriceProduct.getText().substring(0, idxVND);
+								priceProduct = elePriceProduct.getText().substring(0, idxVND).replace(".", "").replace(",", "").trim();
 								
 							}
 							
@@ -218,7 +219,7 @@ public class MainSteps {
 							
 							String nameProduct = eleNameProduct.getText().trim();
 							int idxD = elePriceProduct.getText().indexOf("đ");
-							String priceProduct = elePriceProduct.getText().substring(0, idxD);
+							String priceProduct = elePriceProduct.getText().substring(0, idxD).replace(".", "").replace(",", "").trim();
 							String linkProduct = eleLinkProduct.getAttribute("href");
 							String nameWebSite = "Tiki";
 							
@@ -251,7 +252,7 @@ public class MainSteps {
 	@Step("sort the result in ascending order of price")
 	public void sortTheResultInAscendingOrderOftPrice(List<InforProduct> lstInforProduct) throws InterruptedException {
 		
-		InforProduct tempInforProduct = lstInforProduct.get(0);
+		InforProduct tempInforProduct;
 		
 		 for (int i = 0 ; i < lstInforProduct.size() - 1; i++) {
 	           for (int j = i + 1; j < lstInforProduct.size(); j++) {
@@ -260,13 +261,13 @@ public class MainSteps {
 	        	  InforProduct objInforProductNext = lstInforProduct.get(j);
 	        	  
 	        	  Double priceProduct = Double.parseDouble(objInforProduct.getPriceProduct());
-	 			  Double priceProductNext = Double.parseDouble(objInforProductNext.getPriceProduct()); 	 
+	        	  Double priceProductNext = Double.parseDouble(objInforProductNext.getPriceProduct()); 	 
 	            	
 	  			  if (priceProduct > priceProductNext) {
 	  				  
 	  				  tempInforProduct = objInforProduct;
-	  				  objInforProductNext = objInforProduct;
-	  				  objInforProduct = tempInforProduct;
+	  				  objInforProduct = objInforProductNext;
+	  				  objInforProductNext = tempInforProduct;
 	  				  
 	  			  }
 	            	
