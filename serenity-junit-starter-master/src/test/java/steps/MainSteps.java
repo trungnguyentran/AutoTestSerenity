@@ -208,7 +208,8 @@ public class MainSteps {
 							lstDisplayInforProduct.add(eleLinkProduct.isDisplayed());
 							
 							String nameProduct = eleNameProduct.getText().trim();
-							String priceProduct = elePriceProduct.getText().replace("đ", "");
+							int idxD = elePriceProduct.getText().indexOf("đ");
+							String priceProduct = elePriceProduct.getText().substring(0, idxD);
 							String linkProduct = eleLinkProduct.getAttribute("href");
 							String nameWebSite = "Tiki";
 							
