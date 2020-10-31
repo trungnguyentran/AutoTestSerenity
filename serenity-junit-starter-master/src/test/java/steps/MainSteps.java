@@ -3,6 +3,8 @@ package steps;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -252,27 +254,24 @@ public class MainSteps {
 	@Step("sort the result in ascending order of price")
 	public void sortTheResultInAscendingOrderOftPrice(List<InforProduct> lstInforProduct) throws InterruptedException {
 		
-		InforProduct tempInforProduct;
-		
-		 for (int i = 0 ; i < lstInforProduct.size() - 1; i++) {
-	           for (int j = i + 1; j < lstInforProduct.size(); j++) {
-
-	        	  InforProduct objInforProduct = lstInforProduct.get(i);
-	        	  InforProduct objInforProductNext = lstInforProduct.get(j);
-	        	  
-	        	  Double priceProduct = Double.parseDouble(objInforProduct.getPriceProduct());
-	        	  Double priceProductNext = Double.parseDouble(objInforProductNext.getPriceProduct()); 	 
+		  Collections.sort(lstInforProduct, new Comparator<InforProduct>() {
+	            @Override
+	            public int compare(InforProduct pro1, InforProduct pro2) {
 	            	
-	  			  if (priceProduct > priceProductNext) {
-	  				  
-	  				  tempInforProduct = objInforProduct;
-	  				  objInforProduct = objInforProductNext;
-	  				  objInforProductNext = tempInforProduct;
-	  				  
-	  			  }
+	            	double pro1PriceProduct = Double.parseDouble(pro1.getPriceProduct());
+	            	double pro2PriceProduct = Double.parseDouble(pro2.getPriceProduct());
 	            	
+	                if (pro1PriceProduct > pro2PriceProduct) {
+	                    return 1;
+	                } else {
+	                    if (pro1PriceProduct == pro2PriceProduct) {
+	                        return 0;
+	                    } else {
+	                        return -1;
+	                    }
+	                }
 	            }
-	        }
+	        });
 		
 	}
 	
