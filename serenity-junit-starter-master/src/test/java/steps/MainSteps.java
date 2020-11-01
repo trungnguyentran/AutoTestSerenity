@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import ecomerce.CommonMethod;
+import ecomerce.Constants;
 import ecomerce.InforProduct;
 import net.thucydides.core.annotations.Step;
 
@@ -91,12 +92,12 @@ public class MainSteps {
 							
 								int idxTo = elePriceProduct.getText().indexOf("to");
 								priceProduct = elePriceProduct.getText().substring(0, idxTo).replace("VND", "")
-										              .replace(".", "").replace(",", "").trim();	
+										              .replace(",", "").trim();	
 								
 							} else {
 								
 								int idxVND = elePriceProduct.getText().indexOf("VND");
-								priceProduct = elePriceProduct.getText().substring(0, idxVND).replace(".", "").replace(",", "").trim();
+								priceProduct = elePriceProduct.getText().substring(0, idxVND).replace(",", "").trim();
 								
 							}
 							
@@ -160,7 +161,7 @@ public class MainSteps {
 				WebElement eleBoQuaButtonTiki = objCommonMethod.findElementXPathConditionExist(xPathBoQuaButtonTiki, driver);
 				if (eleBoQuaButtonTiki !=null) {
 					
-					    Thread.sleep(8000);
+					    Thread.sleep(Constants.TIME_WAIT_DISPLAY_POPUP_TIKI);
 						eleBoQuaButtonTiki.click();
 						
 				}
@@ -221,7 +222,7 @@ public class MainSteps {
 							
 							String nameProduct = eleNameProduct.getText().trim();
 							int idxD = elePriceProduct.getText().indexOf("đ");
-							String priceProduct = elePriceProduct.getText().substring(0, idxD).replace(".", "").replace(",", "").trim();
+							String priceProduct = elePriceProduct.getText().substring(0, idxD).replace(".", "").trim();
 							String linkProduct = eleLinkProduct.getAttribute("href");
 							String nameWebSite = "Tiki";
 							
